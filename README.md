@@ -1,131 +1,99 @@
-# 🎬 Movie Data Analysis
+# 🎬 Netflix Movie Data Analysis
 
-This project focuses on analyzing a movie dataset using Python and popular data analysis libraries such as Pandas, NumPy, Matplotlib, and Seaborn. The main objective of this project is to perform Exploratory Data Analysis (EDA) and extract meaningful insights related to movie popularity, ratings, genres, languages, and audience trends.
-
----
-
-## 📌 Project Overview
-
-In this project, I worked with a real-world movie dataset containing information about movies such as titles, genres, release dates, popularity scores, vote counts, ratings, and original languages.
-
-The project demonstrates:
-- Data Cleaning
-- Data Preprocessing
-- Exploratory Data Analysis (EDA)
-- Statistical Analysis
-- Data Visualization
+A comprehensive Exploratory Data Analysis (EDA) project on a Netflix movie dataset using Python. This project uncovers insights about genre distribution, movie popularity, vote averages, and release trends.
 
 ---
 
-## 🛠️ Technologies Used
+## 📁 Dataset
 
-- Python
-- Pandas
-- NumPy
-- Matplotlib
-- Seaborn
-- Jupyter Notebook
+- **File:** `mymoviedb.csv`
+- **Records:** 9,827 movies
+- **Columns:** 9 (Release_Date, Title, Overview, Popularity, Vote_Count, Vote_Average, Original_Language, Genre, Poster_Url)
 
 ---
 
-## 📂 Dataset Information
+## 🛠️ Tech Stack
 
-The dataset contains the following movie-related attributes:
+| Tool | Purpose |
+|------|---------|
+| Python 3 | Core language |
+| Pandas | Data manipulation |
+| NumPy | Numerical operations |
+| Matplotlib | Plotting |
+| Seaborn | Statistical visualization |
+| JupyterLab | Development environment |
 
-- Title
-- Genre
-- Release Date
-- Popularity
-- Vote Count
-- Vote Average
-- Original Language
-- Poster URL
+---
 
-Dataset File:
+## 📊 Project Workflow
+
+### 1. Data Loading & Exploration
+- Loaded dataset using `pd.read_csv()`
+- Inspected shape, dtypes, and sample records with `head()`, `info()`, `describe()`
+- Confirmed **zero duplicate rows** and **zero null values**
+
+### 2. Data Cleaning & Preprocessing
+- Converted `Release_Date` from string → `datetime64` → extracted **year** (int32)
+- Dropped irrelevant columns: `Overview`, `Original_Language`, `Poster_Url`
+- Final working columns: `Release_Date`, `Title`, `Popularity`, `Vote_Count`, `Vote_Average`, `Genre`
+
+### 3. Feature Engineering
+- **Vote_Average Categorization:** Built a reusable `categorize_col()` function using `pd.cut()` with quartile-based bin edges to label movies as:
+  - `not_popular` | `below_avg` | `average` | `popular`
+- **Genre Exploding:** Split comma-separated genre strings and exploded the DataFrame to one genre per row — expanding from **9,827 → 25,552 rows**
+- Cast `Genre` column to `category` dtype (19 unique genres)
+
+### 4. Data Visualization
+
+#### Most Frequent Genre
+> **Drama** is the most common genre with **3,715 entries**
+
+#### Genre Distribution (Bar Chart)
+Top genres by frequency:
+1. Drama
+2. Comedy
+3. Action
+4. Thriller
+5. Adventure
+
+#### Votes Distribution (Bar Chart)
+Vote categories are nearly evenly distributed (~2,400–2,467 each), indicating a balanced dataset across popularity tiers.
+
+#### Release Date Distribution (Histogram)
+Movie releases show a strong upward trend toward recent years, with the highest concentration in the most recent decade.
+
+### 5. Popularity Analysis
+- **Most Popular Movie:** Spider-Man: No Way Home (2021) — Popularity: 5083.954, Genre: Action/Adventure/Science Fiction
+- **Least Popular Movie:** The United States vs. Billie Holiday (2021) — Popularity: 13.354, Genre: Music/Drama/History
+
+---
+
+## 💡 Key Insights
+
+- Drama dominates Netflix's catalog, followed by Comedy and Action
+- Recent years (2010s–2020s) account for the majority of content
+- Vote averages are evenly distributed across the 4 popularity tiers
+- High-popularity films tend to span multiple action-oriented genres
+
+---
+
+## 🚀 How to Run
+
 ```bash
-mymoviedb.csv
+# Clone the repository
+git clone https://github.com/007Ayushi/Netflix_Movie_DataAnalysis.git
+
+# Install dependencies
+pip install pandas numpy matplotlib seaborn jupyter
+
+# Launch Jupyter
+jupyter lab Netflix_Movie_DataAnalysis.ipynb
 ```
 
 ---
 
-## 📊 Analysis Performed
 
-✔️ Imported and explored the dataset  
-✔️ Checked dataset shape and structure  
-✔️ Handled duplicate records  
-✔️ Performed statistical analysis using `describe()`  
-✔️ Analyzed movie popularity and ratings  
-✔️ Explored genres and language distribution  
-✔️ Created visualizations using Matplotlib and Seaborn  
+## 👩‍💻 Author
 
----
-
-## 📈 Sample Visualizations
-
-The project includes different visualizations such as:
-
-- Genre Distribution Charts
-- Popularity Analysis
-- Rating Comparison Graphs
-- Language Distribution
-- Movie Trends Analysis
-
----
-
-## 📁 Project Structure
-
-```bash
-movie-data-analysis/
-│── README.md
-│── .gitignore
-│── requirements.txt
-│── Movie_Data_Analysis.ipynb
-│── mymoviedb.csv
-```
-
----
-
-## 🚀 How to Run the Project
-
-1. Clone the repository
-
-```bash
-git clone https://github.com/your-username/movie-data-analysis.git
-```
-
-2. Navigate to the project folder
-
-```bash
-cd movie-data-analysis
-```
-
-3. Install required libraries
-
-```bash
-pip install -r requirements.txt
-```
-
-4. Open Jupyter Notebook
-
-```bash
-jupyter notebook
-```
-
----
-
-## ⭐ Future Improvements
-
-- Build an interactive dashboard
-- Create a movie recommendation system
-- Add advanced data visualizations
-- Deploy the project using Streamlit
-
----
-
-## 🙋‍♀️ Author
-
-Ayushi Gupta
-
----
-
-If you like this project, feel free to ⭐ the repository.
+**Ayushi Gupta**  
+GitHub: [@007Ayushi](https://github.com/007Ayushi)
